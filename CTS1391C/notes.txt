@@ -1,0 +1,85 @@
+####################
+## Start of Notes ##
+####################
+## DNS1 ##
+# Setup Forward and Reverse DNS Lookup Zones
+# Open Server Manager > Tools > DNS
+#     Forward Lookup Zone > New Zone
+#         New Primary Zone:
+#             Zone Name: contoso.com
+#                 Do not allow dynamic updates
+#     contoso.com
+#         Start of Authority:
+#             Primary Server: cs03-dns1.contoso.com
+#             Responsible person: hostmaster.contoso.com
+#         Name Servers:
+#             Edit pre-existing entry:
+#                 FQDN: cs03-dns1.contoso.com
+#                 IP: 172.16.0.2
+#             Add new entry:
+#                 FQDN: cs03-dns2.contoso.com
+#                 IP: 172.16.0.3
+#         New CNAME record:
+#             Alias: ns1
+#             FQDN: cs03-dns1.contoso.com
+#         New CNAME record:
+#             Alias: ns2
+#             FQDN: cs03-dns2.contoso.com
+#         New A record:
+#             Name: cs03-www
+#             IP: 172.16.0.4
+#         New A record:
+#             Name: Leave this empty
+#             IP: 172.16.0.4
+#         New CNAME record:
+#             Alias: www
+#             FQDN: cs03-www.contoso.com
+#     Reverse Lookup Zone > New Zone
+#         New Primary Zone:
+#             IPv4 Reverse Lookup Zone
+#                 Network ID: 172.16
+#                     Do not allow dynamic updates
+#     CS03-DNS1 > Properties
+#         Forwarders:
+#             Edit:
+#                 IP1: 10.13.2.5
+#                 IP2: 10.13.2.7
+## DNS2 ##
+# Forward Lookup Zone > New Zone
+#   New Secondary Zone:
+#       Zone Name: contoso.com
+#           Master Servers:
+#               IP: 172.16.0.2
+# Reverse Lookup Zone > New Zone
+#   New Secondary Zone:
+#       IPv4 Reverse Lookup Zone
+#           Network ID: 172.16
+#               Master Servers:
+#                   IP: 172.16.0.2
+#
+## WWW ##
+# Make website folder and website index file with title and body
+# Run as Command Prompt commands, these will fail in Powershell
+mkdir \inetpub\mysite
+copy con \inetpub\mysite\index.html
+<html>
+<head>
+<title>My First Website</title>
+</head>
+<body>
+This is the body of my website
+</body>
+</html>
+# Hit ctrl + Z and then Enter to save the file
+# Open Server Manager > Tools > Internet Information Services (IIS) Manager
+#   CS03-WWW (CS03-WWW\Administrator)
+#       Sites
+#           Add Website
+#               Site name: contoso.com ###The site name can literally be anything
+#               Physical path: C:\inetpub\mysite
+#               Host name: www.contoso.com
+#           contoso.com > Edit Bindings
+#               Add > Host name: contoso.com
+##################
+## End of Notes ##
+##################
