@@ -72,6 +72,7 @@ This is the body of my website
 </body>
 </html>
 # Hit ctrl + Z and then Enter to save the file
+# Create website and add binding to use website without www host record
 # Open Server Manager > Tools > Internet Information Services (IIS) Manager
 #   CS03-WWW (CS03-WWW\Administrator)
 #       Sites
