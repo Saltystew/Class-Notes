@@ -45,6 +45,7 @@
 #                 IP1: 10.13.2.5
 #                 IP2: 10.13.2.7
 ## DNS2 ##
+# Setup Forward and Reverse DNS Lookup Zones
 # Forward Lookup Zone > New Zone
 #   New Secondary Zone:
 #       Zone Name: contoso.com
